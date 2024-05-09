@@ -13,7 +13,7 @@ const Header = () => {
       return;
     }
     try {
-      let data = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchVal}`);
+      let data = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchVal.toLowerCase()}`);
       let converted = await data.json();
       let details = {
         name: searchVal,
@@ -49,10 +49,8 @@ const Header = () => {
           <input
             type="text"
             placeholder="Pokemon name..."
-            onChange={(e) => {
-              let str = e.target.value;
-              setSearchVal(str.toLowerCase());
-            }}
+            value={searchVal}
+            onChange={(e) => setSearchVal(e.target.value)}
           />
           <button onClick={handleSearch}>Search</button>
         </div>
