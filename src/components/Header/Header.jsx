@@ -49,8 +49,10 @@ const Header = () => {
           <input
             type="text"
             placeholder="Pokemon name..."
-            value={searchVal}
-            onChange={(e) => setSearchVal(e.target.value)}
+            onChange={(e) => {
+              let str = e.target.value;
+              setSearchVal(str.toLowerCase());
+            }}
           />
           <button onClick={handleSearch}>Search</button>
         </div>
