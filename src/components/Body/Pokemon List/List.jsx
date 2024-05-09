@@ -1,24 +1,21 @@
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../../../context/Context";
 import Loader from "../../Loader";
-import Card from "../Card/Card";
+import Card from "../../Card/Card";
 import "./List.css";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const List = () => {
-  const { search, setSearch, abilityValue , allData } = useContext(UserContext);
+  const { search, setSearch, abilityValue, typeValue, allData } =
+    useContext(UserContext);
   const [loader, setLoader] = useState(true);
   const [detailData, setDetailData] = useState([]);
   const [scroll, setScroll] = useState(10);
-  
-  const [filteredData , setFilteredData] = useState([])
-  
-  
+  const [filteredData, setFilteredData] = useState([]);
 
   const fetchData = async (url) => {
     const response = await fetch(url);
     const data = await response.json();
-    // setNextUrl(data.next);
     return data.results.map(async (result) => {
       const res = await fetch(result.url);
       let convertedDatas = await res.json();
@@ -26,10 +23,15 @@ const List = () => {
         id: convertedDatas.id,
         name: result.name,
         image: convertedDatas.sprites.other
-          ? convertedDatas.sprites.other.dream_world.front_default
+          ? convertedDatas.sprites.other.dream_world.front_default == null
+            ? convertedDatas.sprites.other.home.front_default
+            : convertedDatas.sprites.other.dream_world.front_default
           : convertedDatas.sprites.front_shiny,
         type: convertedDatas.types,
-        ability : convertedDatas.abilities.map((element) => element.ability.name)
+        ability: convertedDatas.abilities.map(
+          (element) => element.ability.name
+        ),
+        flag: false,
       };
     });
   };
@@ -47,20 +49,10 @@ const List = () => {
     }
   };
 
-
-  
-
- 
-
- 
-
   useEffect(() => {
     fetchDataAndSetDetailData();
-   
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
- 
 
   useEffect(() => {
     if (detailData.length !== 0) {
@@ -69,24 +61,23 @@ const List = () => {
   }, [detailData]);
 
   const filtereData = () => {
-    if(abilityValue == ""){
-      setFilteredData([...detailData])
-    }else{
-      let filtered = allData.filter((element) =>
-        element.ability.some((ability) => ability === abilityValue)
+    if (abilityValue == "" && typeValue == "") {
+      setFilteredData([...detailData]);
+    } else {
+      let filtered = allData.filter(
+        (element) =>
+          (abilityValue === "" || element.ability.includes(abilityValue)) &&
+          (typeValue === "" || element.types.includes(typeValue))
       );
       setFilteredData([...filtered]);
     }
-  }
-
-  console.log(filteredData);
+  };
 
   useEffect(() => {
-    filtereData()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  } , [abilityValue , detailData])
+    filtereData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [abilityValue, detailData, typeValue]);
 
-  console.log(detailData);
   return (
     <div className="data">
       {loader ? (
@@ -111,11 +102,14 @@ const List = () => {
             next={fetchDataAndSetDetailData}
             hasMore={true}
             scrollableTarget={window}
-            
           >
-            {filteredData?.map((element) => (
-              <Card data={element} key={element.id} />
-            ))}
+            {filteredData.length == 0 ? (
+              <h1>No Pokemon found</h1>
+            ) : (
+              filteredData?.map((element) => (
+                <Card data={element} key={element.id} />
+              ))
+            )}
           </InfiniteScroll>
         </div>
       )}

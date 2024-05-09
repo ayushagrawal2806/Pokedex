@@ -2,7 +2,7 @@
     width: 100%;
     padding: 1.5rem 0;
     background-color: black;
-    min-height: 90vh;
+    min-height: 71.6vh;
 }
 
 .data .loader{
@@ -17,6 +17,7 @@
 .data .search .back{
     display: flex;
     justify-content: end;
+    margin-bottom: 1rem;
     
 }
 
@@ -41,12 +42,19 @@
     justify-content: center;
 }
 
+
+
 .data  .list  .infinite-scroll-component__outerdiv .infinite-scroll-component{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 2rem;
+    padding: 0.5rem 0;
+}
+
+.data  .list h1{
+    color: white;
 }
 
 data .list a{

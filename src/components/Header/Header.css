@@ -7,6 +7,8 @@
     position: sticky;
     top: 0;
     background-color: black;
+    z-index: 100;
+    overflow: hidden;
 }
 
 .header .logo{
@@ -18,7 +20,13 @@
     height: 100%;
 }
 
-.header .search{
+.header .search-favourite{
+    display: flex;
+    align-items: center;
+    column-gap: 1rem;
+}
+
+.header .search-favourite .search{
     width: 500px;
     display: flex;
     column-gap: 1rem;
@@ -30,7 +38,7 @@
     border-radius: 5px;
 }
 
-.header .search button{
+.header .search-favourite button{
     cursor: pointer;
     background-color: black;
     color: white;
@@ -39,9 +47,13 @@
     font-size: 1.2rem;
     border: 1px solid white;
     transition: all 0.2s linear;
+    
+}
+.header .search-favourite .favourite .favourite-btn{
+    padding: 0.8rem 0.5rem;
 }
 
-.header .search button:hover{
+.header .search-favourite button:hover{
     background-color: white;
     color: black;
 }
@@ -49,4 +61,42 @@
 .header .filter option{
     width: 100px;
     border: 1px solid red;
+}
+
+@media (max-width : 784px) {
+    .header .search-favourite .search{
+        width: 300px;
+    }
+}
+
+@media (max-width : 584px) {
+    .header{
+        padding: 0.5rem 0;
+    }
+    .header .logo{
+        height: 35px
+    }
+
+    .header .search input{
+        padding: 0.5rem ;
+    }
+    .header .search-favourite .search{
+        width: 70%;
+        column-gap: 0.2rem;
+        
+    }
+    .header .search-favourite{
+        column-gap: 0.2rem;
+    }
+
+    .header .search-favourite button{
+        padding: 0.2rem;
+        font-size: 0.8rem;
+    }
+
+    .header .search-favourite .favourite .favourite-btn{
+        padding: 0.6rem 0.2rem;
+    }
+
+    
 }

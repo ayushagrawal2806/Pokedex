@@ -8,8 +8,12 @@
     justify-content: center;
 }
 
+.pokemon-details .loader{
+    margin-top: 1rem;
+}
+
 .pokemon-details .details-box{
-    width: 70%;
+    width: 900px;
     box-shadow: rgba(255, 255, 255, 0.455) 0px 0px 8px;
     margin: 1rem auto 0;
     display: flex;
@@ -81,7 +85,7 @@
 
 .pokemon-details .details-box .right .abilities ul{
     display: flex;
-    gap: 2rem;
+    gap: 0.5rem 2rem;
     flex-wrap: wrap;
     padding: 0.5rem 2rem;
     border: 1px solid white;
@@ -97,7 +101,7 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 0.5rem 1rem;
     padding: 0.5rem 1rem;
 }
 
@@ -124,8 +128,39 @@
     justify-content: space-between;
     border: 1px solid white;
     
+    
 }
 
 .pokemon-details .details-box .right .moves ul li{
     width: 30%;
+}
+
+@media (max-width : 910px) {
+    .pokemon-details .details-box{
+        flex-direction: column;
+        width: 90%;
+    }
+
+    .pokemon-details .details-box .left{
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    .pokemon-details .details-box .right{
+        width: 100%;
+    }
+}
+
+@media (max-width:600px) {
+    .pokemon-details .details-box .right .stats .stats-data{
+        gap: 0.5rem ;
+    }
+    .pokemon-details .details-box .right .stats .stats-data .stats-data-details{
+        width: 40%;
+    }
+    .pokemon-details .details-box .right .moves ul{
+        padding: 0.5rem 1.4rem
+    }
+    .pokemon-details .details-box .right .moves ul li{
+        width: 50%;
+    }
 }

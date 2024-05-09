@@ -1,11 +1,34 @@
-.filter{
+.filter-box{
     background-color: black;
     color: white;
     padding: 2rem 0;
-    display: flex;
-    justify-content: center;
 }
 
-.filter .abilities select{
+.filter-box h1{
+    text-align: center;
+    margin-bottom: 0.5rem;
+    
+}
+.filter-box .filters{
+    display: flex;
+    justify-content: center;
+    column-gap: 1.5rem;
+}
+
+.filter-box .filters  select{
     padding: 0.25rem 1rem;
+    border-radius: 5px;
+}
+
+.filter-box .filters .common{
+    display: flex;
+    column-gap: 0.5rem;
+}
+
+@media (max-width : 472px) {
+    .filter-box .filters{
+        flex-direction: column;
+        align-items: center;
+        row-gap: 1rem;
+    }
 }
