@@ -1,0 +1,54 @@
+.data{
+    width: 100%;
+    padding: 1.5rem 0;
+    background-color: black;
+    min-height: 90vh;
+}
+
+.data .loader{
+    display: flex;
+    justify-content: center;
+}
+
+.data .search{
+    padding: 0 1rem;
+}
+
+.data .search .back{
+    display: flex;
+    justify-content: end;
+    
+}
+
+.data .search p{
+    text-align: end;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: 1px solid white;
+    transition: all 0.2s linear;
+}
+
+.data .search p:hover{
+    background-color: white;
+    color: black;
+}
+
+.data .search .search-data{
+    display: flex;
+    justify-content: center;
+}
+
+.data  .list  .infinite-scroll-component__outerdiv .infinite-scroll-component{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+
+data .list a{
+    text-decoration: none;
+}

@@ -1,0 +1,11 @@
+.filter{
+    background-color: black;
+    color: white;
+    padding: 2rem 0;
+    display: flex;
+    justify-content: center;
+}
+
+.filter .abilities select{
+    padding: 0.25rem 1rem;
+}
