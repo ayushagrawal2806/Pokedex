@@ -26,7 +26,7 @@ const MyContext = ({ children }) => {
           (element) => element.ability.name
         ),
         types: convertedDatas.types.map((element) => element.type.name),
-        flag: false,
+        flag: favouriteData.some((item) => item.id === convertedDatas.id),
       };
     });
   };

@@ -9,23 +9,17 @@ const Card = (props) => {
   let obj = props;
   let types = obj.data.type.map((element) => element.type.name);
   const handleClick = () => {
-    if (obj.data.flag) {
-      obj.data.flag = false;
-    } else {
-      obj.data.flag = true;
-    }
-
-    let flag = true;
-    favouriteData.forEach((element) => {
-      if (element.id == obj.data.id) {
-        flag = false;
-      }
-    });
-    if (obj.data.flag && flag) {
-      setFavouriteData([...favouriteData, { ...obj.data }]);
-    } else {
-      let filter = favouriteData.filter((element) => element.id != obj.data.id);
-      setFavouriteData([...filter]);
+    const updatedData = { ...obj.data, flag: !obj.data.flag };
+    const isDataInFavourites = favouriteData.some(
+      (element) => element.id === obj.data.id
+    );
+    if (updatedData.flag && !isDataInFavourites) {
+      setFavouriteData([...favouriteData, updatedData]);
+    } else if (!updatedData.flag && isDataInFavourites) {
+      const updatedFavouriteData = favouriteData.filter(
+        (element) => element.id !== obj.data.id
+      );
+      setFavouriteData(updatedFavouriteData);
     }
   };
   return (

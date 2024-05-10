@@ -6,7 +6,7 @@ import "./List.css";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const List = () => {
-  const { search, setSearch, abilityValue, typeValue, allData } =
+  const { search, setSearch, abilityValue, typeValue, favouriteData, allData } =
     useContext(UserContext);
   const [loader, setLoader] = useState(true);
   const [detailData, setDetailData] = useState([]);
@@ -31,7 +31,7 @@ const List = () => {
         ability: convertedDatas.abilities.map(
           (element) => element.ability.name
         ),
-        flag: false,
+        flag: favouriteData.some((item) => item.id === convertedDatas.id),
       };
     });
   };
@@ -62,21 +62,43 @@ const List = () => {
 
   const filtereData = () => {
     if (abilityValue == "" && typeValue == "") {
-      setFilteredData([...detailData]);
+      const updatedFilteredData = detailData.map((item) => ({
+        ...item,
+        flag: favouriteData.some(
+          (favItem) => favItem.id === item.id && favItem.flag
+        ),
+      }));
+      setFilteredData(updatedFilteredData);
     } else {
       let filtered = allData.filter(
         (element) =>
           (abilityValue === "" || element.ability.includes(abilityValue)) &&
           (typeValue === "" || element.types.includes(typeValue))
       );
-      setFilteredData([...filtered]);
+      const updatedFilteredData = filtered.map((item) => ({
+        ...item,
+        flag: favouriteData.some(
+          (favItem) => favItem.id === item.id && favItem.flag
+        ),
+      }));
+      setFilteredData([...updatedFilteredData]);
     }
   };
 
   useEffect(() => {
     filtereData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [abilityValue, detailData, typeValue]);
+  }, [abilityValue, detailData, typeValue, favouriteData]);
+
+  // useEffect(() => {
+  //   const updatedFilteredData = detailData.map((item) => ({
+  //     ...item,
+  //     flag: favouriteData.some(
+  //       (favItem) => favItem.id === item.id && favItem.flag
+  //     ),
+  //   }));
+  //   setFilteredData(updatedFilteredData);
+  // }, [favouriteData, detailData]);
 
   return (
     <div className="data">
